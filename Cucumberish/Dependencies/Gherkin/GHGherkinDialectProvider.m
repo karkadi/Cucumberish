@@ -50,12 +50,36 @@
     return [self dialectWithLanguage: theLanguage languagesSetting: languagesSetting location: theLocation];
 }
 
+- (NSBundle*) gherkinLanguagesBundle {
+    NSString *bundleName = @"Cucumberish_Cucumberish";
+    
+    NSArray<NSURL*> *candidates = @[
+        NSBundle.mainBundle.resourceURL,
+        [NSBundle bundleForClass:[self class]].resourceURL
+        [NSBundle bundleForClass:[self class]].resourceURL.URLByDeletingLastPathComponent.URLByDeletingLastPathComponent,
+    ];
+    
+    for (NSURL* candiate in candidates) {
+        NSURL *bundlePath = [candiate URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.bundle", bundleName]];
+        
+        NSBundle *bundle = [NSBundle bundleWithURL:bundlePath];
+        if (bundle != nil) {
+            return bundle;
+        }
+    }
+    
+    @throw [[NSException alloc] initWithName:@"SwiftPMResourcesAccessor" reason:[NSString stringWithFormat:@"unable to find bundle named %@", bundleName] userInfo:nil];
+}
+
 - (NSDictionary<NSString *, GHGherkinLanguageSetting *> *)languagesSetting
 {
+ NSBundle * gherkinLanguagesBundle = [self gherkinLanguagesBundle];
+ /*
     NSBundle * gherkinLanguagesBundle = [NSBundle bundleWithPath: [[NSBundle bundleForClass:[self class]] pathForResource: @"GherkinLanguages" ofType: @"bundle"]];
     if(gherkinLanguagesBundle == nil){
         gherkinLanguagesBundle = [NSBundle bundleForClass:[self class]];
     }
+ */
     NSData * languagesFileContent = [NSData dataWithContentsOfFile: [gherkinLanguagesBundle pathForResource: @"gherkin-languages" ofType: @"json"]];
     
     /*TODO: check for error
