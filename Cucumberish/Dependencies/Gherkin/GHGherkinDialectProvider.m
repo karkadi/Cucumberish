@@ -55,8 +55,8 @@
     
     NSArray<NSURL*> *candidates = @[
         NSBundle.mainBundle.resourceURL,
-        [NSBundle bundleForClass:[self class]].resourceURL
-        [NSBundle bundleForClass:[self class]].resourceURL.URLByDeletingLastPathComponent.URLByDeletingLastPathComponent,
+        [NSBundle bundleForClass:[self class]].resourceURL,
+        [NSBundle bundleForClass:[self class]].resourceURL.URLByDeletingLastPathComponent.URLByDeletingLastPathComponent
     ];
     
     for (NSURL* candiate in candidates) {
