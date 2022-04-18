@@ -3,7 +3,6 @@ import PackageDescription
 
 let package = Package(
     name: "Cucumberish",
-    defaultLocalization: "en",
     products: [.library(name: "Cucumberish",
                         type: .dynamic,
                         targets: ["Cucumberish"])],
