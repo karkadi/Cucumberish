@@ -1,22 +1,14 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.1
 import PackageDescription
 
 let package = Package(
     name: "Cucumberish",
-    platforms: [.iOS("10.0"),
-                .macOS("10.9"),
-                .tvOS("9.0")],
     products: [.library(name: "Cucumberish",
-                        type: .static,
                         targets: ["Cucumberish"])],
-    dependencies: [],
     targets: [.target(name: "Cucumberish",
                       path: "Cucumberish",
-                      // exclude: ["../.git/"],
-                     sources: ["Cucumberish.m"
- //"Dependencies/Gherkin/GHHasLocationProtocol.m"
-                               ],
-        //              publicHeadersPath: ".",
+                     sources: ["Cucumberish.m"],
+
                       cSettings: [
                         .headerSearchPath("Core"),
                         .headerSearchPath("Core/Managers"),
